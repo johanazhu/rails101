@@ -18,9 +18,12 @@ class GroupsController < ApplicationController
     # 新增帖子 POST
     def create
         @group = Group.new(group_params)
-        @group.save
 
-        redirect_to groups_path
+        if (@group.save)
+            redirect_to groups_path, notice: "新增成功"
+        else
+            render :new
+        end
     end
 
     # 修改帖子页面
