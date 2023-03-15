@@ -34,9 +34,13 @@ class GroupsController < ApplicationController
     # 修改帖子 PUT
     def update
         @group = Group.find(params[:id])
-        @group.update(group_params)
 
-        redirect_to groups_path, notice: "修改成功"
+        if @group.update(group_params)
+            redirect_to groups_path, notice: "修改成功"
+        else
+            render :edit
+        end
+    
     end
 
     # 删除帖子 DELETE
