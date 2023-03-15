@@ -28,6 +28,14 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
     end
 
+    # 修改帖子 PUT
+    def update
+        @group = Group.find(params[:id])
+        @group.update(group_params)
+
+        redirect_to groups_path, notice: "修改成功"
+    end
+
 
     private
         def group_params
