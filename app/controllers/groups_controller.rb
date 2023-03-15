@@ -1,6 +1,13 @@
 class GroupsController < ApplicationController
+
+    # 帖子列表页面
     def index
         @groups = Group.all
+    end
+
+    # 帖子详情页面
+    def show 
+        @group = Group.find(params[:id])
     end
 
     # 新增帖子页面
@@ -15,6 +22,7 @@ class GroupsController < ApplicationController
 
         redirect_to groups_path
     end
+
 
     private
         def group_params
