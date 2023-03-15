@@ -23,6 +23,11 @@ class GroupsController < ApplicationController
         redirect_to groups_path
     end
 
+    # 修改帖子页面
+    def edit
+        @group = Group.find(params[:id])
+    end
+
 
     private
         def group_params
