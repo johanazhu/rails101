@@ -36,6 +36,16 @@ class GroupsController < ApplicationController
         redirect_to groups_path, notice: "修改成功"
     end
 
+    # 删除帖子 DELETE
+    def destroy
+        @group = Group.find(params[:id])
+        @group.destroy
+
+        flash[:alert] = "Group deleted"
+        redirect_to groups_path
+        # redirect_to groups_path, notice: "Group deleted"
+    end
+
 
     private
         def group_params
