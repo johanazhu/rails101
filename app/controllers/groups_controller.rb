@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
     # 帖子详情页面
     def show 
         @group = Group.find(params[:id])
-        @posts = @group.post.recent
+        @posts = @group.post.recent.paginate(:page => params[:page], :per_page => 5)
     end
 
     # 新增帖子页面

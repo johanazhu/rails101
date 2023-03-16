@@ -48,9 +48,12 @@ gem "jquery-rails"
 # gem "sassc-rails"
 gem "bootstrap-sass"
 
+# 表单
 gem 'simple_form'
-
+# 登录注册
 gem 'devise'
+# 分页
+gem 'will_paginate'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
