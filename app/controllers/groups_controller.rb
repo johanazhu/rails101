@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 
     before_action :authenticate_user! ,only: [:new, :create, :edit, :update, :destroy]
+    before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
     # 帖子列表页面
     def index
@@ -30,21 +31,11 @@ class GroupsController < ApplicationController
     end
 
     # 修改帖子页面
-    def edit
-        @group = Group.find(params[:id])
-
-        if current_user != @group.user
-            redirect_to root_path, alert: "你没有权限修改此帖子！"
-        end
+    def edit  
     end
 
     # 修改帖子 PUT
     def update
-        @group = Group.find(params[:id])
-
-        if current_user != @group.user
-            redirect_to root_path, alert: "你没有权限修改此帖子！"
-        end
 
         if @group.update(group_params)
             redirect_to groups_path, notice: "修改成功"
@@ -56,12 +47,6 @@ class GroupsController < ApplicationController
 
     # 删除帖子 DELETE
     def destroy
-        @group = Group.find(params[:id])
-
-
-        if current_user != @group.user
-            redirect_to root_path, alert: "你没有权限删除此帖子！"
-        end
 
         @group.destroy
         # flash[:alert] = "Group deleted"
@@ -71,6 +56,16 @@ class GroupsController < ApplicationController
 
 
     private
+
+        def find_group_and_check_permission
+            @group = Group.find(params[:id])
+
+            if current_user != @group.user
+                redirect_to root_path, alert: "你没有权限修改此帖子！"
+            end
+        end
+
+
         def group_params
             params.require(:group).permit(:title, :description)
         end
