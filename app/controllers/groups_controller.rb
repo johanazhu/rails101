@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
     # 帖子详情页面
     def show 
         @group = Group.find(params[:id])
-        @posts = @group.post
+        @posts = @group.post.order("created_at DESC")
     end
 
     # 新增帖子页面
