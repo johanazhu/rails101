@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
         @group.destroy
         # flash[:alert] = "Group deleted"
         # redirect_to groups_path
-        redirect_to groups_path, notice: "Group deleted"
+        redirect_to groups_path, notice: "组删除成功"
     end
 
     def join
