@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+    before_action :authenticate_user! ,only: [:new]
+
     # 帖子列表页面
     def index
         @groups = Group.all
