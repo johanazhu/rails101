@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
     # 帖子详情页面
     def show 
         @group = Group.find(params[:id])
+        @posts = @group.post
     end
 
     # 新增帖子页面
