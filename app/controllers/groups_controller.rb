@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-    before_action :authenticate_user! ,only: [:new]
+    before_action :authenticate_user! ,only: [:new, :create]
 
     # 帖子列表页面
     def index
@@ -20,6 +20,7 @@ class GroupsController < ApplicationController
     # 新增帖子 POST
     def create
         @group = Group.new(group_params)
+        @group.user = current_user
 
         if (@group.save)
             redirect_to groups_path, notice: "新增成功"
