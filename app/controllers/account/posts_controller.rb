@@ -6,23 +6,26 @@ class Account::PostsController < ApplicationController
     end
 
     def edit
-        # post.group, post
-        @post = Post.find()
+        @group = Group.find(params[:group_id])
+        @post = @group.posts.find(params[:id])
     end
 
     def update
-        @post = Post.find(params[:id])
+        @group = Group.find(params[:group_id])
+        @post = @group.posts.find(params[:id])
 
         if @post.update(post_params)
-            redirect_to account_posts_path, notice: "更新成功"
+            redirect_to account_posts_path, notice: "修改成功"
         else
             render :edit
         end
     end
 
     def destroy
-        @post = Post.find(params[:id])
+        @group = Group.find(params[:group_id])
+        @post = @group.posts.find(params[:id])
         @post.destroy
-        redirect_to account_posts_path, alert: "删除成功"
+        flash[:alert] = '文章删除'
+        redirect_to account_posts_path
     end
 end
